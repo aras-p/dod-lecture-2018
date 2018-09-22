@@ -9,14 +9,26 @@ public class Avoid : MonoBehaviour
 	public float m_AvoidDistance = 1.0f;
 
 	private GameObject[] m_AvoidList;
+	private Transform[] m_AvoidTransforms;
+	private Color[] m_AvoidColors;
+
 	private Transform m_Transform;
 	private Move m_Mover;
 	private SpriteRenderer m_SpriteRenderer;
 
 	void Start ()
 	{
-		// find list of things to avoid
+		// find list of things to avoid; cache their transforms and colors
 		m_AvoidList = GameObject.FindGameObjectsWithTag(m_AvoidTag);
+		m_AvoidTransforms = new Transform[m_AvoidList.Length];
+		m_AvoidColors = new Color[m_AvoidList.Length];
+		for (var i = 0; i < m_AvoidList.Length; ++i)
+		{
+			m_AvoidTransforms[i] = m_AvoidList[i].transform;
+			//@TODO: this assumes the color of a sprite renderer
+			// on the things we're avoiding never changes!
+			m_AvoidColors[i] = m_AvoidList[i].GetComponent<SpriteRenderer>().color;
+		}
 
 		// cache our own component references
 		m_Transform = transform;
@@ -35,9 +47,9 @@ public class Avoid : MonoBehaviour
 
 		// check each thing in the list
 		var mypos = m_Transform.position;
-		foreach (var avoid in m_AvoidList)
+		for (var i = 0; i < m_AvoidList.Length; ++i)
 		{
-			var avoidpos = avoid.transform.position;
+			var avoidpos = m_AvoidTransforms[i].position;
 			// is our position closer to "thing to avoid" position than the avoid distance?
 			if ((mypos-avoidpos).sqrMagnitude < m_AvoidDistance * m_AvoidDistance)
 			{
@@ -46,8 +58,7 @@ public class Avoid : MonoBehaviour
 
 				// also make our sprite take the color of the thing
 				// we just bumped into
-				var colorToTake = avoid.GetComponent<SpriteRenderer>().color;
-				m_SpriteRenderer.color = colorToTake;
+				m_SpriteRenderer.color = m_AvoidColors[i];
 			}
 		}
 	}
