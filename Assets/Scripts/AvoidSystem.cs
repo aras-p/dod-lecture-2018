@@ -112,12 +112,11 @@ public class AvoidSystem : MonoBehaviour
 		}
 	}
 
-	float SqrDistance(Vector3 a, Vector3 b)
+	static float SqrDistance(Vector3 a, Vector3 b)
 	{
 		var x = a.x - b.x;
 		var y = a.y - b.y;
-		var z = a.z - b.z;
-		return x * x + y * y + z * z;
+		return x * x + y * y;
 	}
 
 	static void InitializeListOfThingsToAvoidIfNeeded(Key key, Value val)
