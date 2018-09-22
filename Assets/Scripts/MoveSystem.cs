@@ -30,41 +30,45 @@ public class MoveSystem : MonoBehaviour
 
 	public void Update()
 	{
+		var dt = Time.deltaTime;
+		var bounds = WorldBounds.instance;
+		var xMin = bounds.xMin;
+		var xMax = bounds.xMax;
+		var yMin = bounds.yMin;
+		var yMax = bounds.yMax;
 		for (var i = 0; i < m_Entries.Count; ++i)
 		{
 			var e = m_Entries[i];
-			var bounds = WorldBounds.instance;
 			var pos = e.transform.position;
 
 			// update position based on velocity & delta time
-			var dt = Time.deltaTime;
 			pos.x += e.velocity.x * dt;
 			pos.y += e.velocity.y * dt;
 
 			// check against world bounds; put back onto bounds and mirror
 			// the velocity component to "bounce" back
-			if (pos.x < bounds.xMin)
+			if (pos.x < xMin)
 			{
 				e.velocity.x = -e.velocity.x;
-				pos.x = bounds.xMin;
+				pos.x = xMin;
 				m_Entries[i] = e;
 			}
-			if (pos.x > bounds.xMax)
+			if (pos.x > xMax)
 			{
 				e.velocity.x = -e.velocity.x;
-				pos.x = bounds.xMax;
+				pos.x = xMax;
 				m_Entries[i] = e;
 			}
-			if (pos.y < bounds.yMin)
+			if (pos.y < yMin)
 			{
 				e.velocity.y = -e.velocity.y;
-				pos.y = bounds.yMin;
+				pos.y = yMin;
 				m_Entries[i] = e;
 			}
-			if (pos.y > bounds.yMax)
+			if (pos.y > yMax)
 			{
 				e.velocity.y = -e.velocity.y;
-				pos.y = bounds.yMax;
+				pos.y = yMax;
 				m_Entries[i] = e;
 			}
 
