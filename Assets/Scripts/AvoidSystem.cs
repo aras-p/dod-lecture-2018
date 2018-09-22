@@ -79,7 +79,7 @@ public class AvoidSystem : MonoBehaviour
 				{
 					var avoidpos = val.avoidTransforms[i].position;
 					// is our position closer to "thing to avoid" position than the avoid distance?
-					if ((mypos-avoidpos).sqrMagnitude < avoidDistance2)
+					if (SqrDistance(mypos, avoidpos) < avoidDistance2)
 					{
 						// tell the Move component to "resolve the collision"
 						val.movers[io].ResolveCollision();
@@ -91,6 +91,14 @@ public class AvoidSystem : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	float SqrDistance(Vector3 a, Vector3 b)
+	{
+		var x = a.x - b.x;
+		var y = a.y - b.y;
+		var z = a.z - b.z;
+		return x * x + y * y + z * z;
 	}
 
 	static void InitializeListOfThingsToAvoidIfNeeded(Key key, Value val)
