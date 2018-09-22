@@ -20,6 +20,18 @@ public class AvoidSystem : MonoBehaviour
 	{
 		public string tag;
 		public float distance;
+		public override bool Equals(object obj)
+		{
+			if (!(obj is Key))
+				return false;
+			var o = (Key) obj;
+			return distance == o.distance && tag == o.tag;
+		}
+
+		public override int GetHashCode()
+		{
+			return distance.GetHashCode() ^ tag.GetHashCode();
+		}
 	}
 	class Value
 	{
