@@ -38,6 +38,7 @@ public class AvoidSystem : MonoBehaviour
 		// things to avoid
 		public bool initialized;
 		public Transform[] avoidTransforms;
+		public Vector3[] avoidPositions;
 		public Color[] avoidColors;
 
 		// things that avoid
@@ -81,15 +82,21 @@ public class AvoidSystem : MonoBehaviour
 			var val = kvp.Value;
 			var avoidDistance2 = key.distance * key.distance;
 			InitializeListOfThingsToAvoidIfNeeded(key, val);
+			
+			// calculate transform positions for each thing we'll
+			// be avoiding -- so we don't need to repeat
+			// position queries multiple times inside the later loop
+			for (var ia = 0; ia < val.avoidTransforms.Length; ++ia)
+				val.avoidPositions[ia] = val.avoidTransforms[ia].position;
 
 			// go through all objects that are avoiding
 			for (var io = 0; io < val.transforms.Count; ++io)
 			{
 				var mypos = val.transforms[io].position;
 				// check against each thing it should be avoiding
-				for (var i = 0; i < val.avoidTransforms.Length; ++i)
+				for (var i = 0; i < val.avoidPositions.Length; ++i)
 				{
-					var avoidpos = val.avoidTransforms[i].position;
+					var avoidpos = val.avoidPositions[i];
 					// is our position closer to "thing to avoid" position than the avoid distance?
 					if (SqrDistance(mypos, avoidpos) < avoidDistance2)
 					{
@@ -120,6 +127,7 @@ public class AvoidSystem : MonoBehaviour
 
 		var avoidList = GameObject.FindGameObjectsWithTag(key.tag);
 		val.avoidTransforms = new Transform[avoidList.Length];
+		val.avoidPositions = new Vector3[avoidList.Length];
 		val.avoidColors = new Color[avoidList.Length];
 		for (var i = 0; i < avoidList.Length; ++i)
 		{
