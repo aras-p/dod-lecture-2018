@@ -3,3 +3,7 @@
 /Temp/*
 *.sln
 *.csproj
+Assets/Plugins.meta
+Assets/Plugins/*
+/obj/Debug/*
+/.idea/*
