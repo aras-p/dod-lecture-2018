@@ -9,9 +9,12 @@ public class Move : MonoBehaviour
 	public float m_MaxSpeed = 1.0f;
 
 	private Vector2 m_Velocity;
+	private Transform m_Transform;
 
 	void Start ()
 	{
+		m_Transform = transform;
+
 		// pick random velocity between min & max
 		float angle = Random.Range(0.0f, Mathf.PI * 2.0f);
 		float vel = Random.Range(m_MinSpeed, m_MaxSpeed);
@@ -22,11 +25,12 @@ public class Move : MonoBehaviour
 	void Update ()
 	{
 		var bounds = WorldBounds.instance;
-		var pos = transform.position;
+		var pos = m_Transform.position;
 
 		// update position based on velocity & delta time
-		pos.x += m_Velocity.x * Time.deltaTime;
-		pos.y += m_Velocity.y * Time.deltaTime;
+		var dt = Time.deltaTime;
+		pos.x += m_Velocity.x * dt;
+		pos.y += m_Velocity.y * dt;
 
 		// check against world bounds; put back onto bounds and mirror
 		// the velocity component to "bounce" back
@@ -52,7 +56,7 @@ public class Move : MonoBehaviour
 		}
 
 		// assign the position back
-		transform.position = pos;
+		m_Transform.position = pos;
 	}
 
 	// try to "resolve" a collision with something
@@ -64,9 +68,10 @@ public class Move : MonoBehaviour
 
 		// move us out of collision, by moving just a tiny bit more
 		// than we'd normally move during a frame
-		var pos = transform.position;
-		pos.x += m_Velocity.x * Time.deltaTime * 1.1f;
-		pos.y += m_Velocity.y * Time.deltaTime * 1.1f;
-		transform.position = pos;
+		var pos = m_Transform.position;
+		var dt = Time.deltaTime;
+		pos.x += m_Velocity.x * dt * 1.1f;
+		pos.y += m_Velocity.y * dt * 1.1f;
+		m_Transform.position = pos;
 	}	
 }
