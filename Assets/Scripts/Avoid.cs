@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // "avoid" objects with certain tag. Does not do anything by itself,
 // just adds to the AvoidSystem singleton.
