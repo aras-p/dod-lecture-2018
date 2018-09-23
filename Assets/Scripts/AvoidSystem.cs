@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 
 // "Avoidance system" - things that have Avoid component try to bounce
@@ -68,7 +69,7 @@ public class AvoidSystem : ComponentSystem
 		m_GroupObjects.moves[index] = new Move {velocity = vel};
 	}	
 
-	static float SqrDistance(Vector3 a, Vector3 b)
+	static float SqrDistance(float3 a, float3 b)
 	{
 		var x = a.x - b.x;
 		var y = a.y - b.y;

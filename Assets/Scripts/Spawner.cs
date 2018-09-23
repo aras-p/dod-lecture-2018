@@ -1,6 +1,8 @@
 ﻿using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 // spawn "count" random prefabs
 public class Spawner : MonoBehaviour
@@ -30,7 +32,7 @@ public class Spawner : MonoBehaviour
 			// set velocity: pick random between min & max
 			float angle = Random.Range(0.0f, Mathf.PI * 2.0f);
 			float vel = Random.Range(m_MinSpeed, m_MaxSpeed);
-			var velocity = new Vector2(Mathf.Cos(angle) * vel, Mathf.Sin(angle) * vel);
+			var velocity = new float2(Mathf.Cos(angle) * vel, Mathf.Sin(angle) * vel);
 			manager.SetComponentData(entity, new Move {velocity = velocity});
 			
 			// set color
