@@ -1,28 +1,28 @@
-﻿using UnityEngine;
+﻿using Unity.Entities;
+using UnityEngine;
 
 // Move an object within world bounds.
-// Does not do anything by itself, just adds to the MoveSystem singleton.
+// Does not do anything by itself, just provides data to MoveSystem.
 public class Move : MonoBehaviour
 {
 	public float m_MinSpeed = 0.1f;
 	public float m_MaxSpeed = 1.0f;
 
-	int m_Index;
+	[System.NonSerialized] public Vector2 velocity;
 
 	void Start ()
 	{
 		// pick random velocity between min & max
 		float angle = Random.Range(0.0f, Mathf.PI * 2.0f);
 		float vel = Random.Range(m_MinSpeed, m_MaxSpeed);
-		var x = Mathf.Cos(angle) * vel;
-		var y = Mathf.Sin(angle) * vel;
-		m_Index = MoveSystem.instance.AddToSystem(transform, new Vector2(x, y));
+		velocity.x = Mathf.Cos(angle) * vel;
+		velocity.y = Mathf.Sin(angle) * vel;
 	}
 	
 	// try to "resolve" a collision with something
 	// by bouncing back
 	public void ResolveCollision()
-	{
-		MoveSystem.instance.ResolveCollision(m_Index);
+	{		
+		MoveSystem.instance.ResolveCollision(GetComponent<GameObjectEntity>().Entity);
 	}	
 }

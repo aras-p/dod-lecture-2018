@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212820575637314990}
   - component: {fileID: 114283209743689682}
   - component: {fileID: 114854632724761250}
+  - component: {fileID: 114744241631547662}
   m_Layer: 0
   m_Name: SpaceCute-Girl5
   m_TagString: Untagged
@@ -55,6 +56,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MinSpeed: 3
   m_MaxSpeed: 5
+--- !u!114 &114744241631547662
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1015555375911164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114854632724761250
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212820575637314990}
   - component: {fileID: 114283209743689682}
   - component: {fileID: 114854632724761250}
+  - component: {fileID: 114450327652132760}
   m_Layer: 0
   m_Name: SpaceCute-Girl1
   m_TagString: Untagged
@@ -55,6 +56,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MinSpeed: 3
   m_MaxSpeed: 5
+--- !u!114 &114450327652132760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1015555375911164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114854632724761250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,7 +95,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4de2e9d1cc5ec4c2ab03928d099ceabd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
