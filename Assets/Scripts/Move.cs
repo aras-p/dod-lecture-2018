@@ -1,5 +1,4 @@
-﻿using Unity.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
 // Move an object within world bounds.
 // Does not do anything by itself, just provides data to MoveSystem.
@@ -21,8 +20,17 @@ public class Move : MonoBehaviour
 	
 	// try to "resolve" a collision with something
 	// by bouncing back
-	public void ResolveCollision()
-	{		
-		MoveSystem.instance.ResolveCollision(GetComponent<GameObjectEntity>().Entity);
+	public void ResolveCollision(Transform tr)
+	{
+		// flip velocity
+		velocity = -velocity;
+
+		// move us out of collision, by moving just a tiny bit more
+		// than we'd normally move during a frame
+		var pos = tr.position;
+		var dt = Time.deltaTime;
+		pos.x += velocity.x * dt * 1.1f;
+		pos.y += velocity.y * dt * 1.1f;
+		tr.position = pos;
 	}	
 }

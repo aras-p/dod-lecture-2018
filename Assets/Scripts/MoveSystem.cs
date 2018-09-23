@@ -59,23 +59,5 @@ public class MoveSystem : ComponentSystem
 			// assign the position back
 			e.transform.position = pos;			
 		}
-	}
-	
-	// try to "resolve" a collision with something
-	// by bouncing back
-	public void ResolveCollision(Entity entity)
-	{
-		var e = GetEntities<Group>()[entity.Index];
-		
-		// flip velocity
-		e.move.velocity = -e.move.velocity;
-
-		// move us out of collision, by moving just a tiny bit more
-		// than we'd normally move during a frame
-		var pos = e.transform.position;
-		var dt = Time.deltaTime;
-		pos.x += e.move.velocity.x * dt * 1.1f;
-		pos.y += e.move.velocity.y * dt * 1.1f;
-		e.transform.position = pos;
-	}
+	}	
 }

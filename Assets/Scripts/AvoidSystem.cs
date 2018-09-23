@@ -37,7 +37,7 @@ public class AvoidSystem : ComponentSystem
 				if (SqrDistance(mypos, avoidpos) < av.avoid.m_Distance * av.avoid.m_Distance)
 				{
 					// tell the Move component to "resolve the collision"
-					obj.move.ResolveCollision();
+					obj.move.ResolveCollision(obj.transform);
 
 					// also make our sprite take the color of the thing
 					// we just bumped into
