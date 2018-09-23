@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212826004768775486}
   - component: {fileID: 114811525759404872}
   - component: {fileID: 114192053660182044}
+  - component: {fileID: 114289780936101218}
   m_Layer: 0
   m_Name: ThingToAvoid
   m_TagString: Enemy
@@ -53,6 +54,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114289780936101218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1378612283193618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c86e08228e54f498d53c37788959ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Distance: 1.3
 --- !u!114 &114811525759404872
 MonoBehaviour:
   m_ObjectHideFlags: 1
