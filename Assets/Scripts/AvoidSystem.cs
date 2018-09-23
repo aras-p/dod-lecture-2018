@@ -9,61 +9,63 @@ public class AvoidSystem : ComponentSystem
 {	
 	struct GroupThingsToAvoid
 	{
-		public unsafe Position* position;
-		public unsafe AvoidThis* avoid;
-		public unsafe SpriteColor* color;
+		public ComponentDataArray<Position> positions;
+		public ComponentDataArray<AvoidThis> avoids;
+		public ComponentDataArray<SpriteColor> colors;
+		public readonly int Length;
 	}
+	[Inject] GroupThingsToAvoid m_GroupThingsToAvoid;
 	
 	struct GroupObjects
 	{
-		public unsafe Position* position;
-		public unsafe Avoid* avoid;
-		public unsafe Move* move;
-		public unsafe SpriteColor* color;
+		public ComponentDataArray<Position> positions;
+		public ComponentDataArray<Avoid> avoids;
+		public ComponentDataArray<Move> moves;
+		public ComponentDataArray<SpriteColor> colors;
+		public readonly int Length;
 	}
+	[Inject] GroupObjects m_GroupObjects;
 
 	protected override void OnUpdate()
 	{
-		var avoids = GetEntities<GroupThingsToAvoid>();
-		var objects = GetEntities<GroupObjects>();
-		
 		// go through all objects that are avoiding
-		foreach (var obj in objects)
-		{
-			unsafe
+		for (var io = 0; io < m_GroupObjects.Length; ++io)
+		{			
+			var mypos = m_GroupObjects.positions[io].Value;
+			// check against each thing it should be avoiding
+			for (var ia = 0; ia < m_GroupThingsToAvoid.Length; ++ia)
 			{
-				var mypos = obj.position->Value;
-				// check against each thing it should be avoiding
-				foreach (var av in avoids)
+				var avoidpos = m_GroupThingsToAvoid.positions[ia].Value;
+				var avoiddist = m_GroupThingsToAvoid.avoids[ia].m_Distance;
+				// is our position closer to "thing to avoid" position than the avoid distance?
+				if (SqrDistance(mypos, avoidpos) < avoiddist * avoiddist)
 				{
-					var avoidpos = av.position->Value;
-					// is our position closer to "thing to avoid" position than the avoid distance?
-					if (SqrDistance(mypos, avoidpos) < av.avoid->m_Distance * av.avoid->m_Distance)
-					{
-						// resolve the collision
-						ResolveCollision(ref *obj.move, ref *obj.position);
+					// resolve the collision
+					ResolveCollision(io);
 
-						// also make our sprite take the color of the thing
-						// we just bumped into
-						obj.color->color = av.color->color;
-					}
+					// also make our sprite take the color of the thing
+					// we just bumped into
+					m_GroupObjects.colors[io] = m_GroupThingsToAvoid.colors[ia];
 				}
 			}
 		}
 	}
 	
-	static void ResolveCollision(ref Move move, ref Position position)
+	void ResolveCollision(int index)
 	{
 		// flip velocity
-		move.velocity = -move.velocity;
+		var vel = m_GroupObjects.moves[index].velocity;
+		vel = -vel;
 
 		// move us out of collision, by moving just a tiny bit more
 		// than we'd normally move during a frame
-		var pos = position.Value;
+		var pos = m_GroupObjects.positions[index].Value;
 		var dt = Time.deltaTime;
-		pos.x += move.velocity.x * dt * 1.1f;
-		pos.y += move.velocity.y * dt * 1.1f;
-		position.Value = pos;
+		pos.x += vel.x * dt * 1.1f;
+		pos.y += vel.y * dt * 1.1f;
+		
+		m_GroupObjects.positions[index] = new Position {Value = pos};
+		m_GroupObjects.moves[index] = new Move {velocity = vel};
 	}	
 
 	static float SqrDistance(Vector3 a, Vector3 b)
