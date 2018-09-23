@@ -78,8 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1996a12ecec7040fcb3dfb6ce740b848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AvoidTag: Enemy
-  m_AvoidDistance: 1.3
 --- !u!212 &212820575637314990
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -95,7 +93,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4de2e9d1cc5ec4c2ab03928d099ceabd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
