@@ -20,9 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4544035578950734}
   - component: {fileID: 212820575637314990}
+  - component: {fileID: 114071110583369460}
+  - component: {fileID: 114617832546694728}
   - component: {fileID: 114283209743689682}
   - component: {fileID: 114854632724761250}
-  - component: {fileID: 114071110583369460}
+  - component: {fileID: 114662697772537274}
   m_Layer: 0
   m_Name: SpaceCute-Girl3
   m_TagString: Untagged
@@ -65,8 +67,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b01b3b507394837a02a0cb7934a809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinSpeed: 3
-  m_MaxSpeed: 5
+  m_SerializedData:
+    velocity: {x: 0, y: 0}
+--- !u!114 &114617832546694728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1015555375911164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af0db853e732453799566a0e597993c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedData:
+    Value:
+      x: 0
+      y: 0
+      z: 0
+--- !u!114 &114662697772537274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1015555375911164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f922032aad1e4f109e892944af196e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114854632724761250
 MonoBehaviour:
   m_ObjectHideFlags: 1
